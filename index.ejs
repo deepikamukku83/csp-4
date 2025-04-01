@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Cocktail Recipe</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Random Cocktail Recipe</h1>
+
+  <% if (cocktail) { %>
+    <h2><%= cocktail?.strDrink || 'Unknown Drink' %></h2>
+    <img src="<%= cocktail?.strDrinkThumb || '/default-image.jpg' %>" alt="<%= cocktail?.strDrink || 'Unknown Drink' %>">
+
+    <h3>Ingredients:</h3>
+    <ul>
+      <% for (let i = 1; i <= 15; i++) { %>
+        <% if (cocktail[`strIngredient${i}`]) { %>
+          <li><%= cocktail[`strMeasure${i}`] || '' %> <%= cocktail[`strIngredient${i}`] || '' %></li>
+        <% } %>
+      <% } %>
+    </ul>
+
+    <h3>Instructions:</h3>
+    <p><%= cocktail.strInstructions %></p>
+  <% } else if (error) { %>
+      <p style="color:red;"><%= error %></p>
+  <% } else {%>
+    <p>Click the button to get a random cocktail recipe!</p>
+  <% } %>
+
+  <button onclick="window.location.reload()">Get Another Cocktail</button>
+</body>
+</html>
